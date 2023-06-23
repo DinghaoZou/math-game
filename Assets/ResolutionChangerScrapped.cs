@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResolutionChanger : MonoBehaviour
+public class ResolutionChangerScrapped : MonoBehaviour
 {
     public Dropdown resolutionDropdown;
 
