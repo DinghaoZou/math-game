@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,9 +36,9 @@ public class GameManager : MonoBehaviour
         if (difficulty == 0) {
             NumberThatWillDecideTheEquation = 0;
         } else if (difficulty == 1) {
-            NumberThatWillDecideTheEquation = Random.Range(0, 1);
+            NumberThatWillDecideTheEquation = UnityEngine.Random.Range(0, 1);
         } else if (difficulty == 2) {
-            NumberThatWillDecideTheEquation = Random.Range(0, 2);
+            NumberThatWillDecideTheEquation = UnityEngine.Random.Range(0, 2);
         }
 
         if (NumberThatWillDecideTheEquation == 0) {
@@ -48,9 +49,25 @@ public class GameManager : MonoBehaviour
             theEquationSymbol = "x";
         }
 
-        number1 = Random.Range(0, 9);
-        number2 = Random.Range(0, 9);
+        number1 = UnityEngine.Random.Range(0, 9);
+        number2 = UnityEngine.Random.Range(0, 9);
 
+        theTextOfTheEquation.text = Convert.ToString(number1) + " " + theEquationSymbol + " " + Convert.ToString(number2) + " = ";
+    }
 
+    public void theEventThatHappensAfterTheAnswerHasBeenSubmitted() {
+        if (NumberThatWillDecideTheEquation == 0) {
+            if (Int32.Parse(answerInput.text) == number1 + number2) {
+                
+            }
+        } else if (NumberThatWillDecideTheEquation == 1) {
+            if (Int32.Parse(answerInput.text) == number1 - number2) {
+                
+            }
+        } else if (NumberThatWillDecideTheEquation == 2) {
+            if (Int32.Parse(answerInput.text) == number1 * number2) {
+                
+            }
+        }
     }
 }
