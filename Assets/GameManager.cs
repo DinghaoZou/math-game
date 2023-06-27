@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public InputField answerInput;
     public Text theTextOfTheEquation;
+    public Text theScoreboard;
+    public Text finalScore;
 
     public int NumberThatWillDecideTheEquation;
     public string theEquationSymbol;
@@ -23,7 +25,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        theScore = 0;
+        UpdateEquation();
     }
 
     // Update is called once per frame
@@ -58,16 +61,42 @@ public class GameManager : MonoBehaviour
     public void theEventThatHappensAfterTheAnswerHasBeenSubmitted() {
         if (NumberThatWillDecideTheEquation == 0) {
             if (Int32.Parse(answerInput.text) == number1 + number2) {
-                
+                theScore++;
+                theScoreboard.text = "Score: " + (int)theScore;
+                answerInput.text = "";
+                UpdateEquation();
             }
         } else if (NumberThatWillDecideTheEquation == 1) {
             if (Int32.Parse(answerInput.text) == number1 - number2) {
-                
+                theScore++;
+                theScoreboard.text = "Score: " + (int)theScore;
+                answerInput.text = "";
+                UpdateEquation();
             }
         } else if (NumberThatWillDecideTheEquation == 2) {
             if (Int32.Parse(answerInput.text) == number1 * number2) {
-                
+                theScore++;
+                theScoreboard.text = "Score: " + (int)theScore;
+                answerInput.text = "";
+                UpdateEquation();
             }
         }
+    }
+
+    public void lostTheGame () {
+        finalScore.text = "Final Score: " + theScore;
+        theScore = 0;
+    }
+
+    public void setGameToEasy () {
+        difficulty = 0;
+    }
+
+    public void setGameToNormal () {
+        difficulty = 1;
+    }
+
+    public void setGameToHard () {
+        difficulty = 2;
     }
 }
