@@ -18,6 +18,10 @@ public class GameManager : MonoBehaviour
     public Text theTextOfTheEquation;
     public Text theScoreboard;
     public Text finalScore;
+    public Text highScoreOnMainMenu;
+
+    public GameObject gameOverScreen;
+    public GameObject gameScreen;
 
     public int NumberThatWillDecideTheEquation;
     public string theEquationSymbol;
@@ -39,9 +43,9 @@ public class GameManager : MonoBehaviour
         if (difficulty == 0) {
             NumberThatWillDecideTheEquation = 0;
         } else if (difficulty == 1) {
-            NumberThatWillDecideTheEquation = UnityEngine.Random.Range(0, 1);
-        } else if (difficulty == 2) {
             NumberThatWillDecideTheEquation = UnityEngine.Random.Range(0, 2);
+        } else if (difficulty == 2) {
+            NumberThatWillDecideTheEquation = UnityEngine.Random.Range(0, 3);
         }
 
         if (NumberThatWillDecideTheEquation == 0) {
@@ -52,8 +56,8 @@ public class GameManager : MonoBehaviour
             theEquationSymbol = "x";
         }
 
-        number1 = UnityEngine.Random.Range(0, 9);
-        number2 = UnityEngine.Random.Range(0, 9);
+        number1 = UnityEngine.Random.Range(0, 10);
+        number2 = UnityEngine.Random.Range(0, 10);
 
         theTextOfTheEquation.text = Convert.ToString(number1) + " " + theEquationSymbol + " " + Convert.ToString(number2) + " = ";
     }
@@ -65,6 +69,8 @@ public class GameManager : MonoBehaviour
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
+            } else {
+                lostTheGame();
             }
         } else if (NumberThatWillDecideTheEquation == 1) {
             if (Int32.Parse(answerInput.text) == number1 - number2) {
@@ -72,6 +78,8 @@ public class GameManager : MonoBehaviour
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
+            } else {
+                lostTheGame();
             }
         } else if (NumberThatWillDecideTheEquation == 2) {
             if (Int32.Parse(answerInput.text) == number1 * number2) {
@@ -79,13 +87,33 @@ public class GameManager : MonoBehaviour
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
+            } else {
+                lostTheGame();
             }
         }
     }
 
     public void lostTheGame () {
+        answerInput.text = "";
+        gameOverScreen.gameObject.SetActive(true);
+        gameScreen.gameObject.SetActive(false);
         finalScore.text = "Final Score: " + theScore;
+
+        if (highScore < theScore) {
+            highScore = theScore;
+        }
+
         theScore = 0;
+        theScoreboard.text = "Score: " + (int)theScore;
+    }
+
+    public void setScoreToZero () {
+        theScore = 0;
+        theScoreboard.text = "Score: " + (int)theScore;
+    }
+
+    public void setNewHighScore () {
+        highScoreOnMainMenu.text = "High Score This Session: " + highScore;
     }
 
     public void setGameToEasy () {
