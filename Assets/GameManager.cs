@@ -29,14 +29,19 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        theScore = 0;
-        UpdateEquation();
+        highScore = PlayerPrefs.GetInt("highscore");
+        setNewHighScore();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void StartTheGame () {
+        theScore = 0;
+        UpdateEquation();
     }
 
     public void UpdateEquation () {
@@ -105,6 +110,8 @@ public class GameManager : MonoBehaviour
 
         theScore = 0;
         theScoreboard.text = "Score: " + (int)theScore;
+        PlayerPrefs.SetInt("highscore", highScore);
+        Debug.Log(PlayerPrefs.GetInt("highscore"));
     }
 
     public void setScoreToZero () {
@@ -113,7 +120,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void setNewHighScore () {
-        highScoreOnMainMenu.text = "High Score This Session: " + highScore;
+        highScoreOnMainMenu.text = "High Score: " + highScore;
     }
 
     public void setGameToEasy () {
