@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject gameScreen;
 
+    public AudioSource youAreCorrect;
+    public AudioSource youAreWrong;
+    public AudioSource theMusicInMath;
+
     public int NumberThatWillDecideTheEquation;
     public string theEquationSymbol;
 
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
         if (NumberThatWillDecideTheEquation == 0) {
             if (Int32.Parse(answerInput.text) == number1 + number2) {
                 theScore++;
+                youAreCorrect.Play();
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
@@ -80,6 +85,7 @@ public class GameManager : MonoBehaviour
         } else if (NumberThatWillDecideTheEquation == 1) {
             if (Int32.Parse(answerInput.text) == number1 - number2) {
                 theScore++;
+                youAreCorrect.Play();
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
@@ -89,6 +95,7 @@ public class GameManager : MonoBehaviour
         } else if (NumberThatWillDecideTheEquation == 2) {
             if (Int32.Parse(answerInput.text) == number1 * number2) {
                 theScore++;
+                youAreCorrect.Play();
                 theScoreboard.text = "Score: " + (int)theScore;
                 answerInput.text = "";
                 UpdateEquation();
@@ -100,6 +107,8 @@ public class GameManager : MonoBehaviour
 
     public void lostTheGame () {
         answerInput.text = "";
+        theMusicInMath.Stop();
+        youAreWrong.Play();
         gameOverScreen.gameObject.SetActive(true);
         gameScreen.gameObject.SetActive(false);
         finalScore.text = "Final Score: " + theScore;

@@ -10,9 +10,19 @@ public class VolumeManager : MonoBehaviour
     public float soundVolume = 0f;
     
     public AudioMixer masterMixer;
+    public AudioMixer musicMixer;
+    public AudioMixer soundMixer;
 
     public void setMasterVolume (float masterVolume) {
         masterMixer.SetFloat("Master Volume", masterVolume);
+    }
+
+    public void setMusicVolume (float musicVolume) {
+        masterMixer.SetFloat("Music Volume", musicVolume);
+    }
+
+    public void setSoundVolume (float soundVolume) {
+        masterMixer.SetFloat("Sound Volume", soundVolume);
     }
 
     // Start is called before the first frame update
