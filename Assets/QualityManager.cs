@@ -8,6 +8,10 @@ public class QualityManager : MonoBehaviour
     public Dropdown resolutionDropdown;
     public string resolutionSelected;
 
+    void Start() {
+        resolutionSelected = PlayerPrefs.GetString("qualityLevel");
+    }
+
     // Start is called before the first frame update
     /* void Start()
     {
@@ -57,5 +61,6 @@ public class QualityManager : MonoBehaviour
         }
 
         Debug.Log(QualitySettings.GetQualityLevel());
+        PlayerPrefs.SetString("qualityLevel", resolutionSelected);
     }
 }
